@@ -1,14 +1,18 @@
 const mongoose = require('mongoose');
+
+// MongoDB 연결
 const connectDB = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/product-db', {
+     const conn = await mongoose.connect('mongodb://127.0.0.1:27017/stormcredit', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log('MongoDB 연결 성공');
-  } catch (error) {
-    console.error('MongoDB 연결 실패:', error);
-    process.exit(1);
+
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (err) {
+    console.error(`Error: ${err.message}`);
+    process.exit(1); // 실패 시 종료
   }
 };
+
 module.exports = connectDB;
